@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes');
-const usersRouter = require('./routes/users');
 
 const server = express();
 
@@ -16,6 +15,9 @@ server.use(cookieParser());
 server.use(express.static(path.join(__dirname, 'public')));
 
 server.use('/', indexRouter);
-server.use('/users', usersRouter);
+server.use('/scrape', indexRouter);
+
+const PORT = 5500;
+server.listen(PORT, () => console.log(`Express server listening on port ${PORT}`));
 
 export default server;
