@@ -4,7 +4,7 @@ import Downloader from "../libs/downloader";
 const router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.send('que tal aqui estoy')
+  res.json({message: 'Hi there from Express!'})
 });
 
 router.get('scrape', (req, res, next) => {

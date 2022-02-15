@@ -1,4 +1,5 @@
 import express from 'express';
+import cors, {CorsOptions} from 'cors';
 // const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -8,6 +9,11 @@ const indexRouter = require('./routes');
 
 const server = express();
 
+const corsOptions: CorsOptions = {
+    origin: 'http://localhost:3000'
+}
+
+server.use(cors(corsOptions))
 server.use(logger('dev'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
