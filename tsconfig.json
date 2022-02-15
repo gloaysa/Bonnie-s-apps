@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES5",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": false,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "lib": [
+      "DOM", "ESNext"
+    ],
+  },
+  "include": [
+    "server/**/*",
+    "app/**/*"
+  ],
+}
