@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {MainRoutes} from '../../routes/main-routes.enum';
 
 const TopNavComponent = () => {
     return (
@@ -10,8 +11,8 @@ const TopNavComponent = () => {
             }}
         >
             <Link to="/">Home</Link> |{" "}
-            <Link to="/one">Route 1</Link> |{" "}
-            <Link to="/two">Route 2</Link>
+            <Link to={`/${MainRoutes.splitNames}`}>Split Names</Link> |{" "}
+            <Link to={`/${MainRoutes.webDownloader}`}>Web Downloader</Link>
         </nav>
     )
 }

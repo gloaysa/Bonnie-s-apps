@@ -9,7 +9,7 @@ const {
 const resourceManager = require("../resource_manager/resource_manager");
 
 /**
- * Checks if the url ends with at least one of the provided suffixes.
+ * Checks if the url ends with at least split-names of the provided suffixes.
  * Please note the function doesn't add . before the suffix however it is recommended
  * to pass suffixes with . in order to make sure that it is really a file's suffix.
  * For example if we pass ['js'] we probably want all of the js files and not
@@ -54,7 +54,7 @@ const getResourceNameFromUrl = (url: any) =>
  * 1. url points to the same image, for example:
  *    https://someapi.com/v1.1/en/logo.png and https://someapi.com/v1.1/he/logo.png.
  *    This logic only works when the crawlers filenameGenerator parameter is set to byType, see {@link https://github.com/website-scraper/node-website-scraper#filenamegenerator}.
- * 2. The urls ends with one of the {@link allowedImageSuffixes}.
+ * 2. The urls ends with split-names of the {@link allowedImageSuffixes}.
  * @param {String} url The url that will be checked.
  * @param {String[]} allowedImageSuffixes All of the allowed suffixes for images, must be a valid image suffix.
  */
@@ -73,7 +73,7 @@ const checkImage = (url: string, allowedImageSuffixes: string[]) => {
 
 /**
  * Checks if the url should be downloaded.
- * Please note: in case one of the black listed items is in the url it will be disqualified regardless
+ * Please note: in case split-names of the black listed items is in the url it will be disqualified regardless
  * of the other parameters.
  * @param {String} url The url that will be checked.
  * @param {String} domain The expected domain of the url.

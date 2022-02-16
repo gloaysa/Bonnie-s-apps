@@ -20,11 +20,6 @@ const App = (): JSX.Element => {
                 <h2>Welcome to Bonnie's apps</h2>
             </div>
             <Outlet />
-            <p className="App-intro">
-                {text}
-            </p>
-            <button onClick={getText} >Get text</button>
-
         </div>
     );
 }
