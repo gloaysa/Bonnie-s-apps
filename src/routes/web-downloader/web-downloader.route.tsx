@@ -1,5 +1,5 @@
 import React from 'react';
 
-const WebDownloaderRoute = ():JSX.Element => <main><h2>Web Downloader</h2></main>
+const WebDownloaderRoute = ():JSX.Element => <main/>
 
 export default WebDownloaderRoute;

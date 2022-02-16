@@ -2,25 +2,25 @@ import React, {useState} from 'react';
 import './App.css';
 import {Outlet} from 'react-router-dom';
 import TopNavComponent from './components/top-nav/top-nav.component';
+import {getCurrentRoute} from './routes/routes.utils';
+import {MainRoutes} from './routes/main-routes';
+import HomeRoute from './routes/home/home.route';
+import Box from '@mui/material/Box/Box';
 
 const App = (): JSX.Element => {
-    const [text, setText] = useState('Hi!');
+    const currentRoute = getCurrentRoute();
 
-    const getText = async () => {
-        await fetch('http://localhost:5500/')
-            .then(data => data.json())
-            .then(data => {
-                setText(data.message);
-            })
-    }
+    const currentRouteIsHome = currentRoute.href === MainRoutes.home;
+
     return (
-        <div className="App">
+        <Box className="App">
             <div className="App-header">
                 <TopNavComponent/>
-                <h2>Welcome to Bonnie's apps</h2>
+                <h2>{currentRoute.description || currentRoute.label}</h2>
             </div>
             <Outlet />
-        </div>
+            {currentRouteIsHome && <HomeRoute />}
+        </Box>
     );
 }
 
