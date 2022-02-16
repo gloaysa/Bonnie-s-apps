@@ -1,7 +1,8 @@
 {
   "name": "bonnies-apps",
   "version": "1.0.0",
-  "description": "Collection of js util apps using electron, express and react",
+  "description": "Electron + React + Express + Typescript Bundle",
+  "author": "Guillermo Loaysa",
   "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
@@ -12,7 +13,7 @@
     "postbuild": "tsc && mv dist/server build && rm -rf dist",
     "electron": "wait-on tcp:3000 && electron-forge start",
     "package": "npm run build && electron-forge package",
-    "make": "react-scripts build && electron-forge make"
+    "make": "npm run build && electron-forge make"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
