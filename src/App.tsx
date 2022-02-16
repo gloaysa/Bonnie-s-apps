@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
+import {Outlet} from 'react-router-dom';
+import TopNavComponent from './components/top-nav/top-nav.component';
 
 const App = (): JSX.Element => {
     const [text, setText] = useState('Hi!');
@@ -14,12 +16,15 @@ const App = (): JSX.Element => {
     return (
         <div className="App">
             <div className="App-header">
+                <TopNavComponent/>
                 <h2>Welcome to Bonnie's apps</h2>
             </div>
+            <Outlet />
             <p className="App-intro">
                 {text}
             </p>
             <button onClick={getText} >Get text</button>
+
         </div>
     );
 }

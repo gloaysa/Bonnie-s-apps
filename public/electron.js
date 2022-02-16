@@ -5,7 +5,6 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
-const url = require('url');
 const isDev = require("electron-is-dev");
 const server = require('../build/server/server');
 
@@ -49,6 +48,10 @@ app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
         app.quit()
     }
+    server.close(() => {
+        console.log('Closed out remaining connections');
+        process.exit(0);
+    });
 });
 
 app.on('activate', function () {

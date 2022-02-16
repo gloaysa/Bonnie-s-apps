@@ -7,23 +7,27 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes');
 
-const server = express();
+const app = express();
+
+app.on('error', (e) => {
+    logger.log('app ERROR:', e)
+})
 
 const corsOptions: CorsOptions = {
     origin: 'http://localhost:3000'
 }
 
-server.use(cors(corsOptions))
-server.use(logger('dev'));
-server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
-server.use(cookieParser());
-server.use(express.static(path.join(__dirname, 'public')));
+app.use(cors(corsOptions))
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-server.use('/', indexRouter);
-server.use('/scrape', indexRouter);
+app.use('/', indexRouter);
+app.use('/scrape', indexRouter);
 
 const PORT = 5500;
-server.listen(PORT, () => console.log(`Express server listening on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Express app listening on port ${PORT}`));
 
-export default server;
+module.exports = server;

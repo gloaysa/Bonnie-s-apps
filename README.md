@@ -5,9 +5,19 @@ npm install
 ```
 
 ```
-npm start
+npm build
+```
+
+```
+npm run dev
 ```
 
 <h3>Done with your app?</h3>
 
-- Create the Desktop executable by [following these instructions](https://electronjs.org/docs/tutorial/application-distribution/)
+```
+npm run package
+```
+
+```
+npm run make
+```

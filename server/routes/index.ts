@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.json({message: 'Hi there from Express!'})
 });
 
-router.get('scrape', (req, res, next) => {
+router.get('/scrape', (req, res, next) => {
   const verbose = true;
   const includeImages = true;
 
@@ -18,7 +18,8 @@ router.get('scrape', (req, res, next) => {
   const outputFolder = 'test2';
   const outputFolderSuffix = 'website'
 
-  downloader.download(domain, startPoint, outputFolder, outputFolderSuffix)
+  downloader.download(domain, startPoint, outputFolder, outputFolderSuffix);
+  res.json({message: 'The website is downloading, please wait.'})
 })
 
 module.exports = router;

@@ -5,15 +5,14 @@
   "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"npm:start-server\"",
+    "start": "react-scripts start",
+    "start-server": "ts-node server/server.ts",
+    "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
     "build": "react-scripts build",
     "postbuild": "tsc && mv dist/server build && rm -rf dist",
-    "build-server": "tsc",
-    "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
     "electron": "wait-on tcp:3000 && electron-forge start",
     "package": "npm run build && electron-forge package",
-    "make": "react-scripts build && electron-forge make",
-    "start-server": "ts-node server/server.ts"
+    "make": "react-scripts build && electron-forge make"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -26,6 +25,7 @@
     "morgan": "^1.10.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
     "website-scraper": "^4.0.1"
   },
   "devDependencies": {
