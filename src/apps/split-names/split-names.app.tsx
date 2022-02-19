@@ -1,11 +1,32 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Box, Button, TextField} from '@mui/material';
 import TableNamesComponent, {TableNamesData} from '../../components/table-names/table-names.component';
+import HowToUseComponent from '../../components/how-to-use/how-to-use.component';
 
 const SplitNamesApp = (): JSX.Element => {
 
     const [textAreaValue, setTextAreaValue] = useState('')
-    const [table, setTable] = useState<TableNamesData[] | undefined[]>([])
+    const [table, setTable] = useState<TableNamesData[] | undefined[]>([]);
+
+    const howToUseDescription = `
+        <p>
+            La función de esta aplicación es convertir una lista de apellidos y nombres separados por comas
+            en dos listas. La primera con los nombres y la segunda con los apellidos.
+            <br/>
+            Para que funcione bien, recuerda que la lista que pegues en el campo de abajo tiene que tener
+            cada <code>apellido, nombre</code> separados por una nueva línea.
+            <br/>
+            <br/>
+    
+            <strong>Ejemplo</strong>
+            <code>
+                <br/>
+                Gómez, Maria
+                <br/>
+                Palomo, Juan
+            </code>
+        </p>
+    `
 
     const handleTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const text: string = event.target.value;
@@ -31,6 +52,7 @@ const SplitNamesApp = (): JSX.Element => {
             display: 'flex',
             flexWrap: 'wrap'
         }}>
+            <HowToUseComponent description={howToUseDescription} />
             <Box sx={{
                 display: 'column',
                 width: '100%'
@@ -44,6 +66,7 @@ const SplitNamesApp = (): JSX.Element => {
                     onChange={handleTextArea}
                     multiline
                     rows={10}
+                    label="Apellido, Nombre"
                 />
                 <br/>
                 <Button
@@ -55,16 +78,27 @@ const SplitNamesApp = (): JSX.Element => {
                     variant="contained"
                     onClick={splitNames}
                 >
-                    Split
+                    Convertir!
                 </Button>
             </Box>
 
             <Box sx={{
-                width: '100%',
-                margin: '20px'
+                margin: '20px 0',
             }}>
 
-                {table.length > 0 && <TableNamesComponent rows={table}/>}
+                {table.length > 0 && (
+                    <>
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                            marginBottom: '20px',
+                        }}>
+                            <Button>Copiar nombres</Button>
+                            <Button>Copiar apellidos</Button>
+                        </div>
+                        <TableNamesComponent rows={table}/>
+                    </>
+                )}
             </Box>
         </Box>
     )

@@ -71,13 +71,13 @@ const headCells: readonly HeadCell[] = [
         id: 'name',
         numeric: false,
         disablePadding: false,
-        label: 'Name',
+        label: 'Nombre',
     },
     {
         id: 'surname',
         numeric: false,
         disablePadding: false,
-        label: 'Surname',
+        label: 'Apellido',
     },
 ];
 
@@ -160,7 +160,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
                     id="tableTitle"
                     component="div"
                 >
-                    Names
+                    Lista convertida
                 </Typography>
             )}
         </Toolbar>
@@ -208,7 +208,7 @@ export const TableNamesComponent: FunctionComponent<TableNamesProps> = ({rows}) 
             <FormControlLabel
                 sx={{ width: '100%'}}
                 control={<Switch checked={dense} onChange={handleChangeDense}/>}
-                label="Dense layout"
+                label="Estilo condensado"
             />
 
             <Paper sx={{width: '100%', mb: 2}}>
