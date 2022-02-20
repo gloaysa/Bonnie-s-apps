@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
+import HomeApp from "../../apps/home/home.app";
 
-const HomeRoute = ():JSX.Element => <main/>
+const HomeRoute = (): JSX.Element => <HomeApp />;
 
 export default HomeRoute;

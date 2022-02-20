@@ -1,40 +1,44 @@
-import React, {FunctionComponent, PropsWithChildren, useState} from 'react';
-import DownloadIcon from '@mui/icons-material/Download';
-import {Button} from '@mui/material';
-import electron from 'electron';
+import React, { FunctionComponent, PropsWithChildren } from "react";
+import DownloadIcon from "@mui/icons-material/Download";
+import { Button } from "@mui/material";
+import electron from "electron";
 
-const remote = window.require('@electron/remote');
+const remote = window.require("@electron/remote");
 const dialog: electron.Dialog = remote.dialog;
 
 interface InputDirectoryProps extends PropsWithChildren<any> {
-    setPath: (path: string) => void;
+  handleSetPath: (path: string) => void;
+  path: string;
 }
 
-const InputDirectoryComponent: FunctionComponent<InputDirectoryProps> = ({ setPath }): JSX.Element => {
-    const [downloadPath, setDownloadPath] = useState('Click to select file');
+const InputDirectoryComponent: FunctionComponent<InputDirectoryProps> = ({
+  path,
+  handleSetPath,
+}): JSX.Element => {
+  let downloadPath = path || "Click to select file";
 
-    const openDialog = async () => {
-        const {filePaths} = await dialog.showOpenDialog({properties: ['openDirectory']});
-        const path = filePaths[0];
-        if (path) {
-            setPath(path);
-            const shortPath = path.split('/').pop();
-            setDownloadPath(shortPath);
-        }
+  const openDialog = async () => {
+    const { filePaths } = await dialog.showOpenDialog({
+      properties: ["openDirectory"],
+    });
+    const path = filePaths[0];
+    if (path) {
+      handleSetPath(path);
     }
+  };
 
-    return (
-        <Button
-            onClick={openDialog}
-            sx={{
-                width: '100%'
-            }}
-            variant="outlined"
-            startIcon={<DownloadIcon />}
-        >
-            {downloadPath}
-        </Button>
-    )
-}
+  return (
+    <Button
+      onClick={openDialog}
+      sx={{
+        width: "100%",
+      }}
+      variant="outlined"
+      startIcon={<DownloadIcon />}
+    >
+      {downloadPath}
+    </Button>
+  );
+};
 
 export default InputDirectoryComponent;

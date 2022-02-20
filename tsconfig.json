@@ -10,12 +10,7 @@
     "allowJs": true,
     "outDir": "dist",
     "baseUrl": ".",
-    "lib": [
-      "DOM", "ESNext"
-    ]
+    "lib": ["DOM", "ESNext", "dom"]
   },
-  "include": [
-    "server/**/*",
-    "src/**/*"
-  ],
+  "include": ["server/**/*", "src/**/*"]
 }
