@@ -1,4 +1,8 @@
 const electron = require('electron');
+const remoteMain = require('@electron/remote/main');
+remoteMain.initialize();
+
+const contextMenu = require('electron-context-menu');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -8,6 +12,24 @@ const path = require('path');
 const isDev = require("electron-is-dev");
 const server = require('../build/server/server');
 
+contextMenu({
+    prepend: (defaultActions, parameters, browserWindow) => [
+        {
+            label: 'Es una imagen',
+            // Only show it when right-clicking images
+            visible: parameters.mediaType === 'image'
+        },
+        {
+            label: 'Search Google for “{selection}”',
+            // Only show it when right-clicking text
+            visible: parameters.selectionText.trim().length > 0,
+            click: () => {
+                shell.openExternal(`https://google.com/search?q=${encodeURIComponent(parameters.selectionText)}`);
+            }
+        }
+    ]
+});
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,7 +37,20 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1024, height: 800, webPreferences: { nodeIntegration: true }});
+    mainWindow = new BrowserWindow({
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule:true,
+            spellcheck: true
+        }
+    });
+
+    mainWindow.maximize();
+    mainWindow.show();
+
+    remoteMain.enable(mainWindow.webContents)
 
     // and load the index.html of the app.
     const startUrl = isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`

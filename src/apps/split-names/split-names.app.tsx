@@ -8,25 +8,27 @@ const SplitNamesApp = (): JSX.Element => {
     const [textAreaValue, setTextAreaValue] = useState('')
     const [table, setTable] = useState<TableNamesData[] | undefined[]>([]);
 
-    const howToUseDescription = `
-        <p>
-            La función de esta aplicación es convertir una lista de apellidos y nombres separados por comas
-            en dos listas. La primera con los nombres y la segunda con los apellidos.
-            <br/>
-            Para que funcione bien, recuerda que la lista que pegues en el campo de abajo tiene que tener
-            cada <code>apellido, nombre</code> separados por una nueva línea.
-            <br/>
-            <br/>
-    
-            <strong>Ejemplo</strong>
-            <code>
+    const howToUseDescription = () => {
+        return (
+            <p>
+                La función de esta aplicación es convertir una lista de apellidos y nombres separados por comas
+                en dos listas. La primera con los nombres y la segunda con los apellidos.
                 <br/>
-                Gómez, Maria
+                Para que funcione bien, recuerda que la lista que pegues en el campo de abajo tiene que tener
+                cada <code>apellido, nombre</code> separados por una nueva línea.
                 <br/>
-                Palomo, Juan
-            </code>
-        </p>
-    `
+                <br/>
+
+                <strong>Ejemplo</strong>
+                <code>
+                    <br/>
+                    Gómez, Maria
+                    <br/>
+                    Palomo, Juan
+                </code>
+            </p>
+        )
+    }
 
     const handleTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const text: string = event.target.value;
@@ -52,7 +54,7 @@ const SplitNamesApp = (): JSX.Element => {
             display: 'flex',
             flexWrap: 'wrap'
         }}>
-            <HowToUseComponent description={howToUseDescription} />
+            <HowToUseComponent headerTitle='¿Cómo se usa?'>{howToUseDescription()} </HowToUseComponent>
             <Box sx={{
                 display: 'column',
                 width: '100%'

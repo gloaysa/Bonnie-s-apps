@@ -1,14 +1,12 @@
 import React, {FunctionComponent, PropsWithChildren, useState} from 'react';
 import {Container, Icon} from '@mui/material';
-import Typography from '@mui/material/Typography';
-import {jsx} from '@emotion/react';
-import JSX = jsx.JSX;
+import Box from '@mui/material/Box/Box';
 
 interface HowToUseProps extends PropsWithChildren<any>{
-    description: string;
+    headerTitle?: string;
 }
 
-const HowToUseComponent: FunctionComponent<HowToUseProps> = ({description}): JSX.Element => {
+const HowToUseComponent: FunctionComponent<HowToUseProps> = ({children, headerTitle}): JSX.Element => {
     const [showDescription, setShowDescription] = useState(false);
 
     const toggleShowDescription = () => {
@@ -19,7 +17,7 @@ const HowToUseComponent: FunctionComponent<HowToUseProps> = ({description}): JSX
         <Container sx={{
             margin: '0, 50px'
         }}>
-            <Typography sx={{
+            <Box sx={{
                 textAlign: 'justify',
             }}>
                 <div
@@ -31,13 +29,13 @@ const HowToUseComponent: FunctionComponent<HowToUseProps> = ({description}): JSX
                     }}
                     onClick={toggleShowDescription}
                 >
-                    <h2>¿Cómo se usa?</h2> {showDescription ? <Icon>keyboard_arrow_up</Icon> :
+                    <h2>{headerTitle}</h2> {showDescription ? <Icon>keyboard_arrow_up</Icon> :
                     <Icon>keyboard_arrow_down</Icon>}
                 </div>
 
-                {showDescription && description}
+                {showDescription && children}
 
-            </Typography>
+            </Box>
         </Container>
     )
 }

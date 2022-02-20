@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Outlet} from 'react-router-dom';
 import TopNavComponent from './components/top-nav/top-nav.component';
