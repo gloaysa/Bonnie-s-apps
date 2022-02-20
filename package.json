@@ -13,7 +13,8 @@
     "postbuild": "tsc && mv dist/server build && rm -rf dist",
     "electron": "wait-on tcp:3000 && electron-forge start",
     "package": "npm run build && electron-forge package",
-    "make": "npm run build && electron-forge make"
+    "make": "npm run build && electron-forge make",
+    "make-darwin-x64": "npm run build && electron-forge make --arch=x64"
   },
   "dependencies": {
     "@electron/remote": "^2.0.4",
@@ -91,6 +92,10 @@
           "name": "@electron-forge/maker-zip",
           "platforms": [
             "darwin"
+          ],
+          "archs": [
+            "x64",
+            "arm64"
           ]
         },
         {
