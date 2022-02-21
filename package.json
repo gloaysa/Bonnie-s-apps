@@ -56,6 +56,7 @@
     "browser-sync": "^0.9.1",
     "concurrently": "^5.2.0",
     "electron": "^17.0.0",
+    "electron-icon-builder": "^2.0.1",
     "eslint": "^7.32.0",
     "foreman": "^2.0.0",
     "gulp": "^4.0.2",
@@ -80,31 +81,19 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "./src/icons/mac/icon.icns"
+      },
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
+          "name": "@electron-forge/maker-dmg",
           "config": {
-            "name": "bonnies_apps"
+            "background": "",
+            "format": "ULFO",
+            "name": "Bonnie's apps",
+            "icon": "./src/icons/mac/icon.icns",
+            "overwrite": true
           }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ],
-          "archs": [
-            "x64",
-            "arm64"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
         }
       ]
     }

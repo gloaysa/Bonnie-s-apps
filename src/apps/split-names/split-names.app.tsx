@@ -3,9 +3,13 @@ import {Box, Button, TextField} from '@mui/material';
 import TableNamesComponent, {TableNamesData} from '../../components/table-names/table-names.component';
 import HowToUseComponent from '../../components/how-to-use/how-to-use.component';
 
+const {clipboard} = window.require('electron');
+
 const SplitNamesApp = (): JSX.Element => {
 
-    const [textAreaValue, setTextAreaValue] = useState('')
+    const [textAreaValue, setTextAreaValue] = useState('');
+    const [names, setNames] = useState<string[]>([]);
+    const [surnames, setSurnames] = useState<string[]>([]);
     const [table, setTable] = useState<TableNamesData[] | undefined[]>([]);
 
     const howToUseDescription = () => {
@@ -30,6 +34,10 @@ const SplitNamesApp = (): JSX.Element => {
         )
     }
 
+    const handleCopyToClipboard = (list: string[]) => {
+      clipboard.writeText(list?.toString());
+    }
+
     const handleTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const text: string = event.target.value;
         setTextAreaValue(text);
@@ -40,12 +48,18 @@ const SplitNamesApp = (): JSX.Element => {
     const splitNames = () => {
         setTable([]);
         const namesArray = textAreaValue.split('\n');
+        let namesTemp: string[] = [];
+        let surnamesTemp: string[] = [];
 
         invertedNames = namesArray.map((nameSurname: string, index: number) => {
             const nameSurnameArray = nameSurname.trim().split(',');
+            namesTemp = [...namesTemp, nameSurnameArray[1]];
+            surnamesTemp = [...surnamesTemp, nameSurnameArray[0]];
             return {name: nameSurnameArray[1], surname: nameSurnameArray[0], id: index.toString()}
         });
 
+        setNames(namesTemp);
+        setSurnames(surnamesTemp);
         setTable(invertedNames);
     }
 
@@ -95,8 +109,8 @@ const SplitNamesApp = (): JSX.Element => {
                             justifyContent: 'space-around',
                             marginBottom: '20px',
                         }}>
-                            <Button>Copiar nombres</Button>
-                            <Button>Copiar apellidos</Button>
+                            <Button onClick={() => handleCopyToClipboard(names)}>Copiar nombres</Button>
+                            <Button onClick={() => handleCopyToClipboard(surnames)}>Copiar apellidos</Button>
                         </div>
                         <TableNamesComponent rows={table}/>
                     </>
