@@ -1,0 +1,25 @@
+name: Actions
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build_on_mac:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 16.14.0
+      - name: Install dependencies
+          run: npm install
+      - name: Build for MacOS arm64
+          run: npm run make
+      - name: Build for MacOS -x64
+          run: npm run make-darwin-x64
+      - name: see directory
+        run: ls ./dist

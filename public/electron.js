@@ -2,6 +2,13 @@ const electron = require("electron");
 const remoteMain = require("@electron/remote/main");
 remoteMain.initialize();
 
+require('update-electron-app')(
+    {
+      repo: 'gloaysa/bonnies_apps',
+      updateInterval: '6 hour',
+    }
+);
+
 const contextMenu = require("electron-context-menu");
 // Module to control application life.
 const app = electron.app;
