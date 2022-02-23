@@ -34,5 +34,11 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: Bump version
         title: Bump version
-    - run: npm ci
-    - run: npm run publish
+    - name: Install dependencies
+      run: npm ci
+    - name: Package & Deploy
+      env:
+        # macOS Code signing certificates
+        CSC_LINK: ${{ "{{ secrets.CSC_LINK" }} }}
+        CSC_KEY_PASSWORD: ${{ "{{ secrets.CSC_KEY_PASSWORD" }} }}
+      run: npm run publish
