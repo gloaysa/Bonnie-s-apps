@@ -28,11 +28,11 @@ jobs:
         cache: 'npm'
     - name: Bump version
       run: npm version patch
-        - name: Create Pull Request
-          uses: peter-evans/create-pull-request@v1
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            commit-message: Bump version
-            title: Bump version
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: Bump version
+        title: Bump version
     - run: npm ci
     - run: npm run publish
