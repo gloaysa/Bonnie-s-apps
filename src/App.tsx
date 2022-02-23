@@ -8,6 +8,7 @@ import HomeRoute from "./routes/home/home.route";
 import Box from "@mui/material/Box/Box";
 import { positions, Provider as AlertProvider, transitions } from "react-alert";
 import AlertComponent from "./components/alert/alert.component";
+const {version} = require('../package.json');
 
 const App = (): JSX.Element => {
   const currentRoute = getCurrentRoute();
@@ -29,6 +30,7 @@ const App = (): JSX.Element => {
         </div>
         <Outlet />
         {currentRouteIsHome && <HomeRoute />}
+        <footer className='App-footer'>v.{version}</footer>
       </Box>
     </AlertProvider>
   );
