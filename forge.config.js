@@ -26,6 +26,7 @@ const config = {
         appBundleId: 'com.loaysa.com',
         appCategoryType: 'public.app-category.tools',
         osxSign: {
+            identity: "Developer ID Application: Guillermo Fernandez de Loaysa Babiano (942HM869G6)",
             hardenedRuntime: true,
             'gatekeeper-assess': false,
             entitlements: './entitlements.plist',
