@@ -85,7 +85,7 @@ function notarizeMaybe() {
         return;
     }
 
-    console.info('Notarizing your app');
+    console.log('Notarizing your app');
 
     config.packagerConfig.osxNotarize = {
         appBundleId: 'com.loaysa.com',
