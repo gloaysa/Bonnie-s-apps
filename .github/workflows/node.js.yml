@@ -38,8 +38,8 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: 'chore: update to version' ${{ steps.package_version.outputs.version }}
-        commit-message: 'chore: update to version' ${{ steps.package_version.outputs.version }}
+        title: "chore: update to version ${{ steps.package_version.outputs.version }}"
+        commit-message: "chore: update to version ${{ steps.package_version.outputs.version }}"
         labels: ci
         delete-branch: true
 
