@@ -1,14 +1,19 @@
-const electron = require("electron");
+const { app, autoUpdater, dialog, BrowserWindow } = require("electron");
 const remoteMain = require("@electron/remote/main");
-const updateApp = require('update-electron-app');
+require('update-electron-app')();
+
+const updateServer = 'https://update.electronjs.org';
+const url = `${updateServer}/update/${process.platform}/${app.getVersion()}`
+
+autoUpdater.setFeedURL({ url })
+
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, 10 * 60 * 1000)
 
 remoteMain.initialize();
 
 const contextMenu = require("electron-context-menu");
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
 
 const path = require("path");
 const isDev = require("electron-is-dev");
@@ -45,11 +50,6 @@ contextMenu({
 let mainWindow;
 
 function createWindow() {
-  if (!isDev) {
-    updateApp({
-      repo: 'gloaysa/bonnies_apps',
-    });
-  }
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -111,6 +111,25 @@ app.on("activate", function () {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  }
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+});
+
+autoUpdater.on('error', message => {
+  console.error('There was a problem updating the application')
+  console.error(message)
 });
 
 // In this file you can include the rest of your app's specific main process

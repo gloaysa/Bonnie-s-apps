@@ -1,12 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-const packageJson = require('./package.json');
 const dotenv = require("dotenv")
 
 dotenv.config()
-
-const { version } = packageJson;
-const iconDir = path.resolve(__dirname, 'assets', 'icons');
 
 if (process.env['WINDOWS_CODESIGN_FILE']) {
     const certPath = path.join(__dirname, 'win-certificate.pfx');
