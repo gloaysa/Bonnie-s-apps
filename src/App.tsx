@@ -28,7 +28,9 @@ const App = (): JSX.Element => {
           <TopNavComponent />
           <h2>{currentRoute.description || currentRoute.label}</h2>
         </div>
-        <Outlet />
+        <Box className="App-main">
+          <Outlet />
+        </Box>
         {currentRouteIsHome && <HomeRoute />}
         <footer className='App-footer'>v.{version}</footer>
       </Box>

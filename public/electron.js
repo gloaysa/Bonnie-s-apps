@@ -45,9 +45,12 @@ contextMenu({
 let mainWindow;
 
 function createWindow() {
-  updateApp({
-        repo: 'gloaysa/bonnies_apps',
-      });
+  if (!isDev) {
+    updateApp({
+      repo: 'gloaysa/bonnies_apps',
+    });
+  }
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     show: false,

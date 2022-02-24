@@ -113,7 +113,6 @@ const WebDownloaderApp = (): JSX.Element => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
-        padding: "20px",
       }}
     >
       {showSpinner && <CircularProgress sx={{ width: "100%" }} />}
@@ -126,7 +125,6 @@ const WebDownloaderApp = (): JSX.Element => {
             sx={{
               display: "column",
               width: "100%",
-              padding: "10px",
               "& > *:not(:last-child)": {
                 marginBottom: "15px",
               },
