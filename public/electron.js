@@ -1,13 +1,8 @@
 const electron = require("electron");
 const remoteMain = require("@electron/remote/main");
-remoteMain.initialize();
+const updateApp = require('update-electron-app');
 
-require('update-electron-app')(
-    {
-      repo: 'gloaysa/bonnies_apps',
-      updateInterval: '6 hour',
-    }
-);
+remoteMain.initialize();
 
 const contextMenu = require("electron-context-menu");
 // Module to control application life.
@@ -50,6 +45,9 @@ contextMenu({
 let mainWindow;
 
 function createWindow() {
+  updateApp({
+        repo: 'gloaysa/bonnies_apps',
+      });
   // Create the browser window.
   mainWindow = new BrowserWindow({
     show: false,
