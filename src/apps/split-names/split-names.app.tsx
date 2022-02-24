@@ -109,8 +109,8 @@ const SplitNamesApp = (): JSX.Element => {
                             justifyContent: 'space-around',
                             marginBottom: '20px',
                         }}>
-                            <Button onClick={() => handleCopyToClipboard(names)}>Copiar nombres</Button>
-                            <Button onClick={() => handleCopyToClipboard(surnames)}>Copiar apellidos</Button>
+                            {/*<Button onClick={() => handleCopyToClipboard(names)}>Copiar nombres</Button>
+                            <Button onClick={() => handleCopyToClipboard(surnames)}>Copiar apellidos</Button>*/}
                         </div>
                         <TableNamesComponent rows={table}/>
                     </>

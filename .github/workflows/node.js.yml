@@ -33,6 +33,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Build application
+      run: npm build
+
     - name: Package & Deploy
       env:
         # macOS Code signing certificates
